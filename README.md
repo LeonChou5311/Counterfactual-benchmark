@@ -8,6 +8,8 @@ root
 |-- lore
 |-- face
 |-- truth
+|-- datasets
+|-- models
 |-- utils // storing all common utilities
 
 dice_test.ipynb
