@@ -1,0 +1,2 @@
+class UnsupportedDataset(Exception):
+    pass
