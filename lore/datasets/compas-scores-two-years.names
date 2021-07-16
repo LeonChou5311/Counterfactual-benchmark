@@ -1,0 +1,12 @@
+class;string;class
+age;integer;continuous
+age_cat;string;discrete
+sex;string;discrete
+race;string;discrete
+priors_count;integer;continuous
+days_b_screening_arrest;integer;continuous
+c_charge_degree;string;discrete
+is_recid;integer;discrete
+is_violent_recid;integer;discrete
+two_year_recid;integer;discrete
+length_of_stay;integer;continuous
