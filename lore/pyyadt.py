@@ -30,9 +30,14 @@ def fit(df, class_name, columns, features_type, discrete, continuous,
     names_file.close()
 
     ### Change to lore folder
-    cmd = './lore/yadt/dTcmd -fd %s -fm %s -sep %s -d %s' % (
+
+    cmd = 'lore/yadt/dTcmd -fd %s -fm %s -sep %s -d %s' % (
         data_filename, names_filename, sep, tree_filename)
     output = subprocess.check_output(cmd.split(), stderr=subprocess.STDOUT)
+
+    # cmd = 'lore/yadt/dTcmd -fd %s -fm %s -sep %s -d %s' % (
+    #     data_filename, names_filename, sep, tree_filename)
+    # output = subprocess.check_output(cmd.split(), stderr=subprocess.STDOUT)
     # cmd = r"dTcmd -fd %s -fm %s -sep '%s' -d %s" % (
     #     data_filename, names_filename, sep, tree_filename)
     # cmd = r'noah "%s"' % cmd
