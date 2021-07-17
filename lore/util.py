@@ -187,7 +187,6 @@ def build_df2explain(bb, X, dataset):
     features_type = dataset['features_type']
     discrete = dataset['discrete']
     label_encoder = dataset['label_encoder']
-    
     y = bb.predict(X)
     yX = np.concatenate((y.reshape(-1, 1), X), axis=1)
     data = list()
@@ -206,7 +205,6 @@ def build_df2explain(bb, X, dataset):
 def dataframe2explain(X2E, dataset, idx_record2explain, blackbox):
     # Dataset to explit to perform explanation (typically is the train or test set (real instances))
     Z = cPickle.loads(cPickle.dumps(X2E))
-
     # Select record to predict and explain
     x = Z[idx_record2explain]
 

@@ -1,4 +1,57 @@
 from lore.util import *
+import pandas as pd
+import numpy as np
+
+def prepare_diabetes_dataset(file_path: str):
+    
+    '''
+    [file_path]: path pointing the csv file.
+    '''
+    
+    df = pd.read_csv(file_path)
+
+    columns = df.columns.tolist()
+
+    columns = columns[-1:] + columns[:-1]
+
+    df = df[columns]
+
+    df.head(5)
+
+    class_name = 'Outcome'
+
+    possible_outcomes = list(df[class_name].unique())
+
+    type_features, features_type = recognize_features_type(df, class_name)
+
+    discrete, continuous = set_discrete_continuous(columns, type_features, class_name, discrete=None, continuous=None)
+
+
+    columns_tmp = list(columns)
+    columns_tmp.remove(class_name)
+    idx_features = {i: col for i, col in enumerate(columns_tmp)}
+
+    df_le, label_encoder = label_encode(df, discrete)
+    X = df_le.loc[:, df_le.columns != class_name].values
+    y = df_le[class_name].values
+
+    dataset = {
+            'name': 'diabetes',
+            'df': df,
+            'columns': list(columns),
+            'class_name': class_name,
+            'possible_outcomes': possible_outcomes,
+            'type_features': type_features,
+            'features_type': features_type,
+            'discrete': discrete,
+            'continuous': continuous,
+            'idx_features': idx_features,
+            'label_encoder': label_encoder,
+            'X': X,
+            'y': y,
+    }
+    
+    return dataset
 
 def prepare_german_dataset(filename, path_data):
 
