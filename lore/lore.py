@@ -10,7 +10,7 @@ def explain(idx_record2explain, X2E, dataset, blackbox,
             ng_function=genetic_neighborhood, #generate_random_data, #genetic_neighborhood, random_neighborhood
             discrete_use_probabilities=False,
             continuous_function_estimation=False,
-            returns_infos=False, path='./', sep=';', log=False, debug_info=None):
+            returns_infos=False, path='./', sep=';', log=False):
 
     random.seed(0)
     class_name = dataset['class_name']
@@ -26,18 +26,14 @@ def explain(idx_record2explain, X2E, dataset, blackbox,
                                                          discrete_use_probabilities, continuous_function_estimation)
 
     dfZ, x = dataframe2explain(X2E, dataset, idx_record2explain, blackbox)
-    debug_info.dfZ_1 = deepcopy(dfZ)
-    debug_info.x_1 = deepcopy(x)
 
     # Generate Neighborhood
     dfZ, Z = ng_function(dfZ, x, blackbox, dataset)
-    debug_info.dfZ_2 = deepcopy(dfZ)
-    debug_info.Z = Z
 
     # Build Decision Tree
     ## This line throw error
     dt, dt_dot = pyyadt.fit(dfZ, class_name, columns, features_type, discrete, continuous,
-                            filename=dataset['name'], path=path, sep=sep, log=log,debug_info=debug_info)
+                            filename=dataset['name'], path=path, sep=sep, log=log)
 
     # Apply Black Box and Decision Tree on instance to explain
     bb_outcome = blackbox.predict(x.reshape(1, -1))[0]

@@ -13,7 +13,7 @@ from collections import defaultdict
 from copy import deepcopy
 
 def fit(df, class_name, columns, features_type, discrete, continuous,
-        filename='yadt_dataset', path='./', sep=';', log=False, debug_info=None):
+        filename='yadt_dataset', path='./', sep=';', log=False):
     
     data_filename = path + filename + '.data'
     names_filename = path + filename + '.names'
@@ -33,9 +33,7 @@ def fit(df, class_name, columns, features_type, discrete, continuous,
 
     cmd = 'lore/yadt/dTcmd -fd %s -fm %s -sep %s -d %s' % (
         data_filename, names_filename, sep, tree_filename)
-    debug_info.cmd = deepcopy(cmd)
     output = subprocess.check_output(cmd.split(), stderr=subprocess.STDOUT)
-    debug_info.cmd_output = deepcopy(output)
 
     # cmd = 'lore/yadt/dTcmd -fd %s -fm %s -sep %s -d %s' % (
     #     data_filename, names_filename, sep, tree_filename)
@@ -48,8 +46,6 @@ def fit(df, class_name, columns, features_type, discrete, continuous,
     if log:
         print(cmd)
         print(output)
-
-    debug_info.tree_filename= deepcopy(tree_filename) 
 
     dt = nx.DiGraph(nx.drawing.nx_pydot.read_dot(tree_filename))
     dt_dot = pydotplus.graph_from_dot_data(open(tree_filename, 'r').read())
