@@ -1,7 +1,7 @@
-import pyyadt
+import lore.pyyadt as pyyadt
 import networkx as nx
 
-from util import *
+from lore.util import *
 
 from sklearn.metrics import f1_score
 from sklearn.metrics import accuracy_score
