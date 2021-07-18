@@ -31,14 +31,14 @@ Solution was `sudo apt-get install cuda`, which install and set up all the depen
 
 Short answer: `NO`
 
-To explain reason, I have to:
-- Review LIME and LINDA
-- What's LORE?
-- Why LORE can be used for generating counterfactuals?
-- The risk of the counterfactuals from LORE
-- What does the `evaluate_counterfactuals` do?
-- Why we can't use `evaluate_counterfactuals` for others?
-- Futherwork
+To explain the reason, I have to:
+- [Review LIME and LINDA](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#lime-and-linda)
+- [What's LORE?](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#whats-lore)
+- [Why LORE can be used for generating counterfactuals?](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#whats-lore)
+- [The risk of the counterfactuals from LORE](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#whats-lore)
+- [What does the `evaluate_counterfactuals` do?](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#whats-lore)
+- [Why we can't use `evaluate_counterfactuals` for others?](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#why-we-cant-use-evaluate_counterfactuals-for-others)
+- [Futherwork](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/README.md#why-we-cant-use-evaluate_counterfactuals-for-others)
 
 
 ### LIME and LINDA:
