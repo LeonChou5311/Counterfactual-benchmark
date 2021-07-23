@@ -63,9 +63,16 @@ LORE has the same concept as LIME and LINDA. The only difference is the permutat
 The rules can be extracted from the decision tree. LORE using decision tree as their interpretable model. Therefore, rules and counterfactuals can be found by exploring the local interpretable model.
 
 
-### The risk of the counterfactuals from LORE
+### The problem of the counterfactuals from LORE
 
-The interpretable model and the black box are not the same model. Therefore, they may have different output value from the same input instance. In other words, the counterfactual found on the interpretable model (Decision tree) has a chance to be a fake counterfactual on the black box. 
+The interpretable model and the black box are not the same model. Therefore, they may have different output value from the same input instance. In other words, the counterfactual found on the interpretable model (Decision tree) has a chance to be a fake counterfactual on the black box. And, the result in the paper shows that only `58.8%` counterfactuals found by decision tree are real counteerfactual in the black box (c-hit in the table). Let me give an example to explain why it's a problem. If a loan application system tells the client that his applications with `amount=50000` has been rejectet. In order to pass this system, LORE (White box) tell the client that his requesting amount has to be lower than `48000`. However, `48000` is the condition on the white box not the real counterfactuals on the system (black box). The real counterfactuals is actually `47500`. Therefore, if this client request another loan with `48000`, he still has the chance to get rejected. When the systme only has `58.8%` to get it right, it will not be a trustworthy system.
+
+![image](https://user-images.githubusercontent.com/37566901/126770237-fbb81e12-6ada-4331-a3a3-47ad92a01e14.png)
+
+#### definition of evaludation matrix
+
+![image](https://user-images.githubusercontent.com/37566901/126770353-c35e9025-5d69-49a4-a308-105de7f623e2.png)
+
 
 ### What does the `evaluate_counterfactuals` do?
 
