@@ -46,6 +46,7 @@ class GeneticAlgorithmPermutationGenerator(object):
             continuous,
             target_name,
             bb,
+            scaler,
             alpha1 = 0.5,
             alpha2 = 0.5,
             eta1 = 1.0,
@@ -66,6 +67,7 @@ class GeneticAlgorithmPermutationGenerator(object):
         self.discrete = discrete
         self.continuous = continuous
         self.target_name = target_name
+        self.scaler = scaler
 
     def record_init(self, x):
         return x
@@ -204,8 +206,8 @@ class GeneticAlgorithmPermutationGenerator(object):
         sim_ratio = 1.0 - self.distance_function(x0d,x1d)
         record_similarity = 0.0 if sim_ratio >= self.eta1 else sim_ratio
     
-        y0 = self.bb.predict(np.asarray(x0).reshape(1, -1))[0]
-        y1 = self.bb.predict(np.asarray(x1).reshape(1, -1))[0]
+        y0 = self.bb.predict(self.scaler.transform(np.asarray(x0).reshape(1, -1)))[0]
+        y1 = self.bb.predict(self.scaler.transform(np.asarray(x1).reshape(1, -1)))[0]
         target_similarity = 1.0 if y0 == y1 else 0.0
     
         fitness_value = self.alpha1 * record_similarity + self.alpha2 * target_similarity
@@ -223,8 +225,8 @@ class GeneticAlgorithmPermutationGenerator(object):
 
         record_similarity = 0.0 if sim_ratio >= self.eta1 else sim_ratio
 
-        y0 = self.bb.predict(np.asarray(x0).reshape(1, -1))[0]
-        y1 = self.bb.predict(np.asarray(x1).reshape(1, -1))[0]
+        y0 = self.bb.predict(self.scaler.transform(np.asarray(x0).reshape(1, -1)))[0]
+        y1 = self.bb.predict(self.scaler.transform(np.asarray(x1).reshape(1, -1)))[0]
         target_similarity = 1.0 if y0 != y1 else 0.0
 
         fitness_value = self.alpha1 * record_similarity + self.alpha2 * target_similarity
