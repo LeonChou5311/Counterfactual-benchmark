@@ -40,7 +40,6 @@ def set_discrete_continuous(features, type_features, class_name, discrete=None, 
         discrete = list(set(discrete + type_features['string']))
     
     discrete = [f for f in discrete if f != class_name] + [class_name]
-    continuous = [f for f in continuous if f != class_name]
     return discrete, continuous
 
 

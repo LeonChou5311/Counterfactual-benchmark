@@ -24,8 +24,7 @@ def prepare_diabetes_dataset(file_path: str):
 
     type_features, features_type = recognize_features_type(df, class_name)
 
-    discrete, continuous = set_discrete_continuous(columns, type_features, class_name, discrete=None, continuous=None)
-
+    discrete, continuous = set_discrete_continuous(columns, type_features, class_name, discrete=['Pregnancies', 'Outcome'], continuous=None)
 
     columns_tmp = list(columns)
     columns_tmp.remove(class_name)

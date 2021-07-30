@@ -1,0 +1,9 @@
+Outcome;integer;class
+Pregnancies;integer;continuous
+Glucose;integer;continuous
+BloodPressure;integer;continuous
+SkinThickness;integer;continuous
+Insulin;integer;continuous
+BMI;double;continuous
+DiabetesPedigreeFunction;double;continuous
+Age;integer;continuous
