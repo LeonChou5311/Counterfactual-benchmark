@@ -170,13 +170,13 @@ class GeneticAlgorithmPermutationGenerator(object):
 
         eq_population, eq_hall_of_fame, eq_logbook = self.fit(eq_toolbox, size_for_each, n_gen, hall_of_fame_ratio, verbose)
 
-        neighbors.append(self.get_oversample(eq_population, eq_hall_of_fame))
+        neighbors.extend(self.get_oversample(eq_population, eq_hall_of_fame))
 
         neq_toolbox = self.get_toolbox(x, feature_values, size_for_each, self.record_init, self.fitness_neq)
 
         neq_population, neq_hall_of_fame, neq_logbook = self.fit(neq_toolbox, size_for_each, n_gen, hall_of_fame_ratio, verbose)
 
-        neighbors.append(self.get_oversample(neq_population, neq_hall_of_fame))
+        neighbors.extend(self.get_oversample(neq_population, neq_hall_of_fame))
 
         return neighbors
 
