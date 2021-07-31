@@ -164,6 +164,8 @@ class GeneticAlgorithmPermutationGenerator(object):
 
         neighbors = []
 
+        x = x.reshape(-1,)
+
         size_for_each = int(population_size / 2)
 
         eq_toolbox =  self.get_toolbox(x, feature_values, size_for_each, self.record_init, self.fitness_eq)
