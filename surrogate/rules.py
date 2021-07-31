@@ -30,8 +30,8 @@ def get_decision_process(x, tree, feature_names):
 
         decisions.append(
             {
-                'node_id': node_id,
-                'feature_idx': feature_idx,
+                'node_id': int(node_id),
+                'feature_idx': int(feature_idx),
                 'feature_name': feature_name,
                 'value': value,
                 'threshold_sign': threshold_sign,
@@ -46,7 +46,7 @@ def get_decision_process(x, tree, feature_names):
                 value=value,
                 inequality=threshold_sign,
                 threshold=threshold))
-    return decisions, prediction
+    return decisions, prediction, leaf_id
 
 
 def print_decisions(decisions):
