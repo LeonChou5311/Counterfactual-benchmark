@@ -122,7 +122,7 @@ After (Our GA):
 
 ![image](https://user-images.githubusercontent.com/37566901/127734757-c437c0f9-55fc-410a-ad25-564a1450d4ac.png)
 
-Note: The 546 cases in here are actual counterfactuals.
+`Note: The 546 cases in here are actual counterfactuals.`
 
 After the change, it can get a balanced permutation dataset.
 
