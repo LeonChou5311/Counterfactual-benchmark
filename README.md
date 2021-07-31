@@ -120,7 +120,7 @@ You can see the prediction of the generated permutations data are severely unbal
 
 After (Our GA):
 
-![image](https://user-images.githubusercontent.com/37566901/127734556-4ff66105-371b-4078-ae78-0f1bde42daea.png)
+![image](https://user-images.githubusercontent.com/37566901/127734757-c437c0f9-55fc-410a-ad25-564a1450d4ac.png)
 
 After the change, it can get a balanced permutation dataset.
 
