@@ -201,6 +201,7 @@ class GeneticAlgorithmPermutationGenerator(object):
 
 
     def fitness_eq(self, x0, x1):
+        ## Function to maximise
         x0d = {self.idx_features[i]: val for i, val in enumerate(x0)}
         x1d = {self.idx_features[i]: val for i, val in enumerate(x1)}
         sim_ratio = 1.0 - self.distance_function(x0d,x1d)
@@ -208,7 +209,8 @@ class GeneticAlgorithmPermutationGenerator(object):
     
         y0 = self.bb.predict(self.scaler.transform(np.asarray(x0).reshape(1, -1)))[0]
         y1 = self.bb.predict(self.scaler.transform(np.asarray(x1).reshape(1, -1)))[0]
-        target_similarity = 1.0 if y0 == y1 else 0.0
+        # target_similarity = 1.0 if y0 == y1 else 0.0
+        target_similarity = -abs(y1-np.round(y0))
     
         fitness_value = self.alpha1 * record_similarity + self.alpha2 * target_similarity
 
@@ -227,7 +229,8 @@ class GeneticAlgorithmPermutationGenerator(object):
 
         y0 = self.bb.predict(self.scaler.transform(np.asarray(x0).reshape(1, -1)))[0]
         y1 = self.bb.predict(self.scaler.transform(np.asarray(x1).reshape(1, -1)))[0]
-        target_similarity = 1.0 if y0 != y1 else 0.0
+        # target_similarity = 1.0 if y0 != y1 else 0.0
+        target_similarity = abs(y1 - np.round(y0))
 
         fitness_value = self.alpha1 * record_similarity + self.alpha2 * target_similarity
 
