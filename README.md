@@ -89,8 +89,40 @@ Therefore, this function is not used for evaluating the generated counterfactual
 What if we apply generic algorithm as the permutation strategy for LINDA? Would it improve LINDA?
 
 
+### Optimising GA in LORE
 
+The original GA implemented in LORE accept rounded output {0, 1} from model. However, this behaviour make GA hard to optimise for better result. I change the target similarity function to:
 
+```python
+
+## Equal case
+# From 
+target_similarity = 1.0 if y0 == y1 else 0.0
+# To
+target_similarity = -abs(y1-np.round(y0))
+
+## Not equal case
+# From
+target_similarity = 1.0 if y0 != y1 else 0.0
+# To
+target_similarity = abs(y1 - np.round(y0))
+
+```
+Input query prediction:
+
+![image](https://user-images.githubusercontent.com/37566901/127734595-d4185562-3c7f-4943-bd83-52657e614aeb.png)
+
+The results before (LORE implemented GA)
+
+![image](https://user-images.githubusercontent.com/37566901/127734582-30ba3149-6b64-42ee-9ef8-8d9091e676d0.png)
+
+You can see the prediction of the generated permutations data are severely unbalanced.
+
+After (Our GA):
+
+![image](https://user-images.githubusercontent.com/37566901/127734556-4ff66105-371b-4078-ae78-0f1bde42daea.png)
+
+After the change, it can get a balanced permutation dataset.
 
 
 
