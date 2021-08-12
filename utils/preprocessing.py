@@ -2,6 +2,9 @@ from sklearn.preprocessing import LabelEncoder
 
 import pandas as pd
 
+from sklearn.preprocessing import MinMaxScaler
+
+
 def get_columns_type(df):
 
     integer_features = list(df.select_dtypes(include=['int64']).columns)
@@ -56,3 +59,9 @@ def remove_missing_values(df):
             df[col][df[col] == '?'] = df[col].value_counts().index[0]
             
     return df
+
+def min_max_scale_numerical(df, numerical_cols):
+    ## Scaling the numerical data.
+    scaler = MinMaxScaler()
+    df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
+    return df, scaler
