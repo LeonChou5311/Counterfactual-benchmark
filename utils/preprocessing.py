@@ -44,6 +44,22 @@ def label_encode(df, columns, encoder_dict=None):
 
     return df_temp, encoder_dict
 
+def label_encode(df, columns, encoder_dict=None):
+    df_temp = df.copy(deep=True)
+
+    if encoder_dict:
+        for col in columns:
+            col_encoder = encoder_dict[col]
+            df_temp[col] = col_encoder.transform(df_temp[col])
+    else:
+        encoder_dict = {}
+        for col in columns:
+            encoder = LabelEncoder()
+            df_temp[col] = encoder.fit_transform(df_temp[col])
+            encoder_dict[col] = encoder
+
+    return df_temp, encoder_dict
+
 def label_decode(df, columns, encoder_dict):
     temp_df = df.copy(deep=True)
     for col in columns:
