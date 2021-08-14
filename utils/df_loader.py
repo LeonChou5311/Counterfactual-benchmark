@@ -22,3 +22,21 @@ def load_adult_df():
     numerical_cols, categorical_cols, columns_type = get_columns_type(df)
 
     return df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes
+
+
+def load_german_df():
+    
+    target_name = 'default'
+
+    df = pd.read_csv('./datasets/german.csv',delimiter=',', skipinitialspace=True)
+
+    feature_names = [col for col in df.columns if col != target_name]
+
+    df = remove_missing_values(df)
+
+    possible_outcomes = list(df[target_name].unique())
+
+    numerical_cols, categorical_cols, columns_type = get_columns_type(df)
+
+    return df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes
+
