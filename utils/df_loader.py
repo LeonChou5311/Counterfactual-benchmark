@@ -30,6 +30,8 @@ def load_german_df():
 
     df = pd.read_csv('./datasets/german.csv',delimiter=',', skipinitialspace=True)
 
+    df[target_name] = df[target_name].apply(lambda x: "Y" if x==1 else "N")
+
     feature_names = [col for col in df.columns if col != target_name]
 
     df = remove_missing_values(df)
