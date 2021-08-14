@@ -81,3 +81,11 @@ def min_max_scale_numerical(df, numerical_cols):
     scaler = MinMaxScaler()
     df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
     return df, scaler
+
+def inverse_dummy(dummy_df, all_cat_ohe_cols):
+    not_dummy_df = dummy_df.copy(deep=True)
+    for k in all_cat_ohe_cols.keys():
+        not_dummy_df[k] = dummy_df[all_cat_ohe_cols[k]].idxmax(axis=1)
+        not_dummy_df[k] = not_dummy_df[k].apply(lambda x: x.replace(f'{k}_',""))
+        not_dummy_df.drop(all_cat_ohe_cols[k], axis=1, inplace=True)
+    return not_dummy_df
