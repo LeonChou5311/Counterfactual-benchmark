@@ -3,7 +3,7 @@ from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
 from sklearn.preprocessing import MinMaxScaler
-
+from sklearn.preprocessing import LabelEncoder
 
 def get_columns_type(df):
 
@@ -89,3 +89,61 @@ def inverse_dummy(dummy_df, all_cat_ohe_cols):
         not_dummy_df[k] = not_dummy_df[k].apply(lambda x: x.replace(f'{k}_',""))
         not_dummy_df.drop(all_cat_ohe_cols[k], axis=1, inplace=True)
     return not_dummy_df
+
+def get_cat_ohe_info(dummy_df, categorical_cols, target_name):
+    all_cat_ohe_cols = {}
+    for c_col in categorical_cols:
+        if c_col != target_name:
+            all_cat_ohe_cols[c_col] = [ ohe_col for ohe_col in dummy_df.columns if ohe_col.startswith(c_col) and ohe_col != target_name]
+
+    ohe_feature_names = [ col for col in dummy_df.columns if col != target_name]
+
+    return all_cat_ohe_cols, ohe_feature_names
+
+
+def preprocess_df(df_load_fn):
+
+    ## Load df information
+    df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes = df_load_fn()
+
+    ## Apply MinMacScaler
+    scaled_df, scaler = min_max_scale_numerical(df, numerical_cols)
+
+    ## Get one-hot encoded features.
+    dummy_df = pd.get_dummies(scaled_df, columns=  [ col for col in categorical_cols if col != target_name])
+
+    ## Get one-hot encoded info
+    all_cat_ohe_cols, ohe_feature_names = get_cat_ohe_info(dummy_df, categorical_cols, target_name)
+
+    ## Preprocessing the label
+    target_label_encoder = LabelEncoder()
+    
+    dummy_df[target_name] = target_label_encoder.fit_transform(dummy_df[target_name])
+
+    dummy_df= dummy_df[ohe_feature_names + [target_name]]
+
+    return DfInfo(df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes, scaled_df, scaler, all_cat_ohe_cols, ohe_feature_names, target_label_encoder, dummy_df)
+
+
+class DfInfo():
+    def __init__(self,df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes, scaled_df, scaler, all_cat_ohe_cols, ohe_feature_names, target_label_encoder, dummy_df,):
+        self.df = df
+        self.feature_names = feature_names
+        self.numerical_cols = numerical_cols
+        self.categorical_cols = categorical_cols
+        self.columns_type = columns_type
+        self.target_name = target_name
+        self.possible_outcomes = possible_outcomes
+        self.scaled_df = scaled_df
+        self.scaler = scaler
+        self.all_cat_ohe_cols = all_cat_ohe_cols
+        self.ohe_feature_names = ohe_feature_names
+        self.target_label_encoder = target_label_encoder
+        self.dummy_df = dummy_df
+
+
+
+
+
+
+
