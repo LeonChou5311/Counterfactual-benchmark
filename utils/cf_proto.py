@@ -34,7 +34,7 @@ def alibi_wrap_models(models):
         'nn': AlibiBinaryPredictWrapper(models['nn']),
     }
 
-def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train):
+def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train, max_iters):
 
     proto_cfs = {}
 
@@ -44,7 +44,7 @@ def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train):
                                     X_train[0].reshape(1, -1).shape,
                                     cat_vars=cat_vars_ohe,
                                     feature_range=feature_range,
-                                    max_iterations=500,
+                                    max_iterations=max_iters,
                                     ohe=True,
                                     )
 
@@ -54,7 +54,7 @@ def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train):
 
 
 
-def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test):
+def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test, max_iters=500):
     cat_feature_names = [ col for col in df_info.categorical_cols if col != df_info.target_name ] 
 
     cat_vars_idx_info, cat_vars_ohe = get_cat_vars_info(cat_feature_names, train_df)
@@ -63,7 +63,7 @@ def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, n
 
     feature_range = (np.ones((1, len(df_info.feature_names))), np.zeros((1, len(df_info.feature_names))))
 
-    profo_cfs = get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train)
+    profo_cfs = get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train, max_iters)
 
     results = {}
     for k in profo_cfs.keys():
