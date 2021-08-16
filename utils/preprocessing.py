@@ -106,7 +106,7 @@ def preprocess_df(df_load_fn):
     ## Load df information
     df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes = df_load_fn()
 
-    ## Apply MinMacScaler
+    ## Apply MinMacScaler [0, 1]
     scaled_df, scaler = min_max_scale_numerical(df, numerical_cols)
 
     ## Get one-hot encoded features.
@@ -120,6 +120,7 @@ def preprocess_df(df_load_fn):
     
     dummy_df[target_name] = target_label_encoder.fit_transform(dummy_df[target_name])
 
+    ## Organise the order
     dummy_df= dummy_df[ohe_feature_names + [target_name]]
 
     return DfInfo(df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes, scaled_df, scaler, all_cat_ohe_cols, ohe_feature_names, target_label_encoder, dummy_df)
@@ -140,6 +141,8 @@ class DfInfo():
         self.ohe_feature_names = ohe_feature_names
         self.target_label_encoder = target_label_encoder
         self.dummy_df = dummy_df
+
+
 
 
 

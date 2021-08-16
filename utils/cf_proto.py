@@ -38,14 +38,20 @@ def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train, max_iter
 
     proto_cfs = {}
 
+    cat_arguments = {}
+    if len(cat_vars_ohe) > 0:
+        cat_arguments['cat_vars'] = cat_vars_ohe
+        cat_arguments['ohe'] = True
+
     for k in wrapped_models.keys():
         proto_cfs[k] = CounterFactualProto(
                                     wrapped_models[k].predict,
                                     X_train[0].reshape(1, -1).shape,
-                                    cat_vars=cat_vars_ohe,
                                     feature_range=feature_range,
                                     max_iterations=max_iters,
-                                    ohe=True,
+                                    **cat_arguments,
+                                    # cat_vars=cat_vars_ohe,
+                                    # ohe=True,
                                     )
 
         proto_cfs[k].fit(X_train)
@@ -55,6 +61,7 @@ def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train, max_iter
 
 
 def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test, max_iters=500):
+
     cat_feature_names = [ col for col in df_info.categorical_cols if col != df_info.target_name ] 
 
     cat_vars_idx_info, cat_vars_ohe = get_cat_vars_info(cat_feature_names, train_df)
@@ -102,7 +109,6 @@ def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, n
                 results[k].append({
                     "input": input_df,
                     "cf": cf,
-                    'exp': exp,
                     "running_time": running_time,
                     "ground_truth": df_info.target_label_encoder.inverse_transform([y_test[idx]])[0],
                     "prediction": prediction,
