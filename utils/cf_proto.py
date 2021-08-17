@@ -164,7 +164,7 @@ def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, n
                 if (not exp.cf is None) and (len(exp.cf) > 0):
                     print("Found CF")
                     ### Change the found CF from ohe format to original format.
-                    cf = inverse_dummy(pd.DataFrame(exp.cf['X'], columns=df_info.ohe_feature_names), df_info.all_cat_ohe_cols)
+                    cf = inverse_dummy(pd.DataFrame(exp.cf['X'], columns=df_info.ohe_feature_names), df_info.cat_to_ohe_cat)
 
                     ### Change the predicted value to the label we understand.
                     cf.loc[0, df_info.target_name] = df_info.target_label_encoder.inverse_transform([exp.cf['class']])[0]
@@ -173,7 +173,7 @@ def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, n
                     cf = None
 
                 ### Change the found input from ohe format to original format.
-                input_df = inverse_dummy(pd.DataFrame(example, columns=df_info.ohe_feature_names), df_info.all_cat_ohe_cols)
+                input_df = inverse_dummy(pd.DataFrame(example, columns=df_info.ohe_feature_names), df_info.cat_to_ohe_cat)
                 input_df.loc[0, df_info.target_name] = prediction
 
                 results[k].append({

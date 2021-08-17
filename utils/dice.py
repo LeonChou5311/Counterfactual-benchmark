@@ -7,17 +7,20 @@ import dice_ml
 import pandas as pd
 
 class RecordWrapper():
-    def __init__(self, model, all_cat_ohe_cols, ohe_feature_names):
+    '''
+    Wrapper for decision tree and random forest.
+    '''
+    def __init__(self, model, cat_to_ohe_cat, ohe_feature_names):
         self.all_inputs = []
         self.model = model
-        self.all_cat_ohe_cols = all_cat_ohe_cols
+        self.cat_to_ohe_cat = cat_to_ohe_cat
         self.ohe_feature_names = ohe_feature_names
 
     def dice_to_input(self, input_df):
         x = input_df.copy(deep=True)
 
-        for k in self.all_cat_ohe_cols.keys():
-            for ohe_col in self.all_cat_ohe_cols[k]:
+        for k in self.cat_to_ohe_cat.keys():
+            for ohe_col in self.cat_to_ohe_cat[k]:
                 x[ohe_col] = x[k].apply(lambda v: 1 if v in ohe_col else 0)
             x.drop([k], axis=1, inplace=True)
 
@@ -35,17 +38,21 @@ class RecordWrapper():
 
 
 class NNRecordWrapper():
-    def __init__(self, model, all_cat_ohe_cols, ohe_feature_names):
+    '''
+    Wrapper for NN specific.
+    '''
+
+    def __init__(self, model, cat_to_ohe_cat, ohe_feature_names):
         self.all_inputs = []
         self.model = model
-        self.all_cat_ohe_cols = all_cat_ohe_cols
+        self.cat_to_ohe_cat = cat_to_ohe_cat
         self.ohe_feature_names = ohe_feature_names
 
     def dice_to_input(self, input_df):
         x = input_df.copy(deep=True)
 
-        for k in self.all_cat_ohe_cols.keys():
-            for ohe_col in self.all_cat_ohe_cols[k]:
+        for k in self.cat_to_ohe_cat.keys():
+            for ohe_col in self.cat_to_ohe_cat[k]:
                 x[ohe_col] = x[k].apply(lambda v: 1 if v in ohe_col else 0)
             x.drop([k], axis=1, inplace=True)
 
@@ -62,14 +69,22 @@ class NNRecordWrapper():
         return self.model.predict(tf.constant(cf_input.astype(float)))
 
 
-def dice_wrap_models(models, all_cat_ohe_cols, ohe_feature_names):
+def dice_wrap_models(models, cat_to_ohe_cat, ohe_feature_names):
+    '''
+    Wrap the models to precess the input and output as the rquired of dice.
+    '''
+
     return {
-        'dt': RecordWrapper(models['dt'], all_cat_ohe_cols, ohe_feature_names),
-        'rfc': RecordWrapper(models['rfc'], all_cat_ohe_cols, ohe_feature_names),
-        'nn': NNRecordWrapper(models['nn'], all_cat_ohe_cols, ohe_feature_names),
+        'dt': RecordWrapper(models['dt'], cat_to_ohe_cat, ohe_feature_names),
+        'rfc': RecordWrapper(models['rfc'], cat_to_ohe_cat, ohe_feature_names),
+        'nn': NNRecordWrapper(models['nn'], cat_to_ohe_cat, ohe_feature_names),
     }
 
 def get_dice_cfs(data_interface, wrapped_models):
+    '''
+    Get DiCE instance for every wrapped models (wrapped by `dice_wrap_models` function).
+    '''
+
     return {
         'dt': dice_ml.Dice(data_interface, dice_ml.Model(model=wrapped_models['dt'], backend="sklearn")),
         'rfc': dice_ml.Dice(data_interface, dice_ml.Model(model=wrapped_models['rfc'], backend="sklearn")),
@@ -78,10 +93,30 @@ def get_dice_cfs(data_interface, wrapped_models):
 
 
 def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf_per_instance, sample_size=200):
+    '''
+    Generate counterfactuals using CounterfactualProto. 
+    This counterfactul generating algorithms supports categorical features and numerical columns.
+
+    [`df_info`] -> DfInfo instance containing all the data information required for generating counterfactuals.
+
+    [`test_df`] -> Data frame contaning test data. (One-hot encoded format)
+
+    [`models`] -> Dictionay of models (Usually containe <1> dt (Decision Tree) (2) rfc (RandomForest) (3) nn (Neural Network))
+    [`num_instances`] -> Number of instances to generate counterfactuals. The instance is extracted from the testset. For example, 
+    if `num_instances = 20`, it means the first 20 instances in the testset will be used for generating the counterfactuals.
+
+    [`num_cf_per_instance`] -> Number of counterfactuals for each instance to generate. If `num_cf_per_instance = 5`, this function will
+    run five times for each instance to search its counterfactual. Therefore, if you have `num_instances = 20, num_cf_per_instance = 5`, 100 searchings
+    will be conducted. (Note: not promise that 100 counterfactuals will be found.)
+
+    [`sample_size`] -> I found this parameters can be used for controlling the length of searching time, but not much information is provided on DiCE documentation.
+    It's a parameters passed to generate_counterfactuals function.
+    (http://interpret.ml/DiCE/dice_ml.explainer_interfaces.html?highlight=generate_counterfactuals#dice_ml.explainer_interfaces.explainer_base.ExplainerBase.generate_counterfactuals)
+    '''
 
     d = dice_ml.Data(dataframe=df_info.scaled_df, continuous_features=df_info.numerical_cols, outcome_name=df_info.target_name)
 
-    wrapped_models = dice_wrap_models(models, df_info.all_cat_ohe_cols, df_info.ohe_feature_names)
+    wrapped_models = dice_wrap_models(models, df_info.cat_to_ohe_cat, df_info.ohe_feature_names)
     dice_cfs = get_dice_cfs(d, wrapped_models)
 
     results = {}
@@ -119,9 +154,13 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
     return results
 
 def process_results(df_info: DfInfo, results):
+    '''
+    Process the result dictionary to construct data frames for each (dt, rfc, nn).
+    '''
 
     result_dfs = {}
 
+    ### Loop through ['dt', 'rfc', 'nn']
     for k in results.keys():
 
         all_data = []
@@ -129,6 +168,7 @@ def process_results(df_info: DfInfo, results):
         for i in range(len(results[k])):
             final_df = pd.DataFrame([{}])
 
+            ### Inverse the scaling process to get the original data for input. 
             scaled_input_df = results[k][i]['input'].copy(deep=True)
             origin_columns = [f"origin_input_{col}"  for col in scaled_input_df.columns]
             origin_input_df = scaled_input_df.copy(deep=True)
@@ -139,6 +179,7 @@ def process_results(df_info: DfInfo, results):
 
             final_df = final_df.join([scaled_input_df, origin_input_df])
 
+            ### If counterfactaul found, inverse the scaling process to get the original data for cf.
             if not results[k][i]['cf'] is None:
                 scaled_cf_df = results[k][i]['cf'].copy(deep=True)
                 scaled_cf_df.loc[0, df_info.target_name] = df_info.target_label_encoder.inverse_transform([scaled_cf_df.loc[0, df_info.target_name]])[0]
@@ -151,7 +192,7 @@ def process_results(df_info: DfInfo, results):
 
                 final_df = final_df.join([scaled_cf_df, origin_cf_df])
 
-            # final_df = final_df.join([scaled_input_df, origin_input_df, scaled_cf_df, origin_cf_df])
+            ### Record additional information.
             final_df['running_time'] = results[k][i]['running_time']
             final_df['Found'] = "Y" if not results[k][i]['cf'] is None else "N"
             final_df['ground_truth'] = results[k][i]['ground_truth'] 
