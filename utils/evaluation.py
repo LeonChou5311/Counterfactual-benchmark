@@ -110,6 +110,10 @@ def prepare_evaluation_dict(result_df: pd.DataFrame, df_info: DfInfo):
 def get_evaluations(result_df: pd.DataFrame, df_info: DfInfo, matrix: List[EvaluationMatrix]):
     '''
     Perform evaluation on the result dataframe according to the matrix given.
+
+    [result_df] -> data frame containing input query and its counterfactaul.
+    [df_info] -> DfInfo instance containing all data information.
+    [matrix] -> The evaluation matrix to perform on `result_df`.
     '''
 
     evaluation_df = result_df.copy(deep=True)
