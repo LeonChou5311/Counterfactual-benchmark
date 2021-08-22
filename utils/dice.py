@@ -132,7 +132,7 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
 
                 input_query = pd.DataFrame([instance.to_dict()])
                 ground_truth = input_query[df_info.target_name][0]
-                exp = dice_cfs[k].generate_counterfactuals(input_query, total_CFs=1, sample_size=sample_size, desired_class="opposite")
+                exp = dice_cfs[k].generate_counterfactuals(input_query[df_info.feature_names], total_CFs=1, sample_size=sample_size, desired_class="opposite")
 
                 # dice_exp = dice_cfs['nn'].generate_counterfactuals(scaled_df.iloc[1:2], total_CFs=1, desired_class="opposite")
                 # dice_exp.cf_examples_list[0].final_cfs_df.iloc[0][:-1]
