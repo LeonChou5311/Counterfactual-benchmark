@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List
 from sklearn.preprocessing import LabelEncoder
+from itertools import chain
 
 import pandas as pd
 
@@ -187,6 +188,16 @@ class DfInfo:
 
     ## Dataframe with scaled numerical features and dummy categorical features (The dataframe used for training).
     dummy_df: pd.DataFrame
+
+
+    def get_ohe_cat_cols(self,):
+        return list(chain(*[ v for v in self.cat_to_ohe_cat.values()]))
+
+    def get_ohe_num_cols(self,):
+        return self.numerical_cols
+
+    def get_numerical_mads(self,):
+        return self.scaled_df[self.numerical_cols].mad().to_dict()
 
 
 

@@ -1,8 +1,9 @@
+import numpy as np
+import pandas as pd
+from enum import Enum
 from typing import List
 from utils.preprocessing import DfInfo
-import pandas as pd
-import numpy as np
-from enum import Enum
+from scipy.spatial import distance
 
 
 class InstanceType(Enum):
@@ -35,6 +36,52 @@ def get_sparsity(**kwargs):
 
     return (input_array != cf_array).astype(int).sum(axis=1)
 
+def get_realisitic(**kwargs):
+    '''
+    Checking if the numerical columns are in the range of [0, 1].
+    '''
+    df_info: DfInfo = kwargs['df_info']
+    cf_num_array = np.array(kwargs['cf'][df_info.numerical_cols])
+    return np.all(np.logical_and(cf_num_array >= 0, cf_num_array <= 1 ), axis=1)
+
+def get_mad(**kwargs,):
+    '''
+    Get Mean Absolute Deviation Distance between input and cf. 
+    '''
+
+    eps = 1e-8
+
+    input_df = kwargs['input']
+    cf_df = kwargs['cf']
+    df_info = kwargs['df_info']
+
+    ohe_cat_cols = df_info.get_ohe_cat_cols()
+    ohe_num_cols = df_info.get_ohe_num_cols()
+
+    numerical_mads = df_info.get_numerical_mads()
+
+    mad_df = pd.DataFrame({}, columns= df_info.ohe_feature_names)
+    mad_df[ohe_cat_cols] = (input_df[ohe_cat_cols] != cf_df[ohe_cat_cols]).astype(int)
+    for num_col in ohe_num_cols: 
+        mad_df[num_col] = abs(cf_df[num_col] - input_df[num_col]) / (numerical_mads[num_col] + eps)
+
+    return mad_df[ohe_num_cols].mean(axis=1) + mad_df[ohe_cat_cols].mean(axis=1) 
+
+
+def get_mahalanobis(**kwargs,):
+    '''
+    Get Mahalanobis distance between input and cf.
+    '''
+    input_df = kwargs['input']
+    cf_df = kwargs['cf']
+    df_info = kwargs['df_info']
+
+    VI_m = df_info.dummy_df[df_info.ohe_feature_names].cov().to_numpy()
+
+    return [distance.mahalanobis(input_df[df_info.ohe_feature_names].iloc[i].to_numpy(),
+                                cf_df[df_info.ohe_feature_names].iloc[i].to_numpy(),
+                                VI_m) for i in range(len(input_df))]
+
 class EvaluationMatrix(Enum):
     '''
     All evaluation function should be registed here.
@@ -42,12 +89,18 @@ class EvaluationMatrix(Enum):
     L1 = "L1"
     L2 = "L2"
     Sparsity = "Sparsity"
+    Realistic = "Realistic"
+    MAD = "MAD"
+    Mahalanobis = "Mahalanobis"
 
 evaluation_name_to_func = {
     # All evaluation function should be registed here as well
     EvaluationMatrix.L1: get_L1,
     EvaluationMatrix.L2: get_L2,
     EvaluationMatrix.Sparsity: get_sparsity,
+    EvaluationMatrix.Realistic: get_realisitic,
+    EvaluationMatrix.MAD: get_mad,
+    EvaluationMatrix.Mahalanobis: get_mahalanobis,
 }
 
 
@@ -104,6 +157,7 @@ def prepare_evaluation_dict(result_df: pd.DataFrame, df_info: DfInfo):
     return {
         "input": get_dummy_version(get_type_instance(result_df, InstanceType.ScaledInput), df_info),
         "cf": get_dummy_version(get_type_instance(result_df, InstanceType.ScaledCf), df_info),
+        "df_info": df_info,
     }
 
 
@@ -117,9 +171,16 @@ def get_evaluations(result_df: pd.DataFrame, df_info: DfInfo, matrix: List[Evalu
     '''
 
     evaluation_df = result_df.copy(deep=True)
-    input_and_cf = prepare_evaluation_dict(evaluation_df, df_info)
+
+    ## Only perform evaluation on the row with found cf.
+    found_idx = evaluation_df[evaluation_df['Found']=="Y"].index
+    cf_found_eaval_df = evaluation_df.loc[found_idx].copy(deep=True)
+
+    input_and_cf = prepare_evaluation_dict(cf_found_eaval_df, df_info)
 
     for m in matrix:
-        evaluation_df[m.value] = evaluation_name_to_func[m](**input_and_cf)
+        cf_found_eaval_df[m.value] = evaluation_name_to_func[m](**input_and_cf)
+
+    evaluation_df.loc[found_idx, cf_found_eaval_df.columns] = cf_found_eaval_df
 
     return evaluation_df
