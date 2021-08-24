@@ -92,7 +92,7 @@ def get_dice_cfs(data_interface, wrapped_models):
     }
 
 
-def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf_per_instance, sample_size=200):
+def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf_per_instance, sample_size=200, test_start_idx = 0):
     '''
     Generate counterfactuals using CounterfactualProto. 
     This counterfactul generating algorithms supports categorical features and numerical columns.
@@ -124,7 +124,7 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
     for k in dice_cfs.keys():
         results[k] = []
         print(f"Finding counterfactual for {k}")
-        for idx, instance in enumerate(df_info.scaled_df.iloc[test_df[0:num_instances].index].iloc):
+        for idx, instance in enumerate(df_info.scaled_df.iloc[test_df[test_start_idx:test_start_idx+num_instances].index].iloc):
             print(f"instance {idx}")
             for num_cf in range(num_cf_per_instance):
                 print(f"CF {num_cf}")
