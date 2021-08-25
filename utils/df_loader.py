@@ -24,6 +24,28 @@ def load_adult_df():
 
     return df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes
 
+def load_breast_cancer_df():
+    
+    target_name = 'diagnosis'
+
+    df = pd.read_csv('./datasets/breast_cancer.csv',
+                     delimiter=',', skipinitialspace=True)
+
+    del df['id']
+    del df['Unnamed: 32']        
+
+    df[target_name] = df[target_name].apply(lambda x: "Y" if x==1 else "N")
+
+    feature_names = [col for col in df.columns if col != target_name]
+
+    df = remove_missing_values(df)
+
+    possible_outcomes = list(df[target_name].unique())
+
+    numerical_cols, categorical_cols, columns_type = get_columns_type(df)
+
+    return df, feature_names, numerical_cols, categorical_cols, columns_type, target_name, possible_outcomes
+
 def load_diabetes_df():
     
     target_name = 'Outcome'
