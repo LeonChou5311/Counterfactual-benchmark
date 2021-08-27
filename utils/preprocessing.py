@@ -87,9 +87,10 @@ def min_max_scale_numerical(df, numerical_cols):
     '''
 
     ## Scaling the numerical data.
+    scaled_df = df.copy(deep=True)
     scaler = MinMaxScaler()
-    df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
-    return df, scaler
+    scaled_df[numerical_cols] = scaler.fit_transform(scaled_df[numerical_cols])
+    return scaled_df, scaler
 
 def inverse_dummy(dummy_df, cat_to_ohe_cat):
     '''
