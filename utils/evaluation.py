@@ -65,7 +65,7 @@ def get_mad(**kwargs,):
     for num_col in ohe_num_cols: 
         mad_df[num_col] = abs(cf_df[num_col] - input_df[num_col]) / (numerical_mads[num_col] + eps)
 
-    return mad_df[ohe_num_cols].mean(axis=1) + mad_df[ohe_cat_cols].mean(axis=1) 
+    return (mad_df[ohe_num_cols].mean(axis=1) + mad_df[ohe_cat_cols].mean(axis=1)).tolist()
 
 
 def get_mahalanobis(**kwargs,):
