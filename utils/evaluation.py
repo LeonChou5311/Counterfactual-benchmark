@@ -185,6 +185,9 @@ def get_evaluations(result_df: pd.DataFrame, df_info: DfInfo, matrix: List[Evalu
     found_idx = evaluation_df[evaluation_df['Found']=="Y"].index
     cf_found_eaval_df = evaluation_df.loc[found_idx].copy(deep=True)
 
+    if len(cf_found_eaval_df) < 1:
+        raise Exception("No counterfactuals found, can't provide any evaluation.")
+
     input_and_cf = prepare_evaluation_dict(cf_found_eaval_df, df_info)
 
     for m in matrix:

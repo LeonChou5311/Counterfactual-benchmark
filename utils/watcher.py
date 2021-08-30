@@ -74,7 +74,7 @@ def get_watcher_cfs(wrapped_models, feature_range, X_train, max_iters):
 
 
 
-def generate_watcher_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test, max_iters=500):
+def generate_watcher_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test, max_iters=1000):
     '''
     Generate counterfactuals using CounterfactualProto. 
     This counterfactul generating algorithms supports categorical features and numerical columns.
