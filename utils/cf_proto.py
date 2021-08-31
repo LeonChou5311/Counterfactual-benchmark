@@ -17,6 +17,9 @@ nn -> Nueral Network
 ohe -> One-hot encoding format
 '''
 
+class Recorder:
+    pass
+
 def get_cat_vars_info(cat_feature_names, train_df):
     '''
     Get information of categorical columns (one-hot).
@@ -115,6 +118,8 @@ def generate_cf_proto_result(df_info: DfInfo, train_df, models, num_instances, n
 
     ### Get wrapped models to meet the input and output of Alibi algorithms.
     wrapped_models = alibi_wrap_models(models)
+
+    Recorder.wrapped_models = wrapped_models
 
     ### Since we use min-max scaler and one-hot encoding, we can contraint the range in [0, 1]
     feature_range = (np.ones((1, len(df_info.feature_names))), np.zeros((1, len(df_info.feature_names))))
