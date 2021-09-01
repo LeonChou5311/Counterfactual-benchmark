@@ -8,5 +8,5 @@ class AlibiBinaryPredictWrapper():
     def predict(self, x):
         num_instances = x.shape[0]
         self.inputs.append(x)
-        modle_output = self.model.predict(x).reshape(num_instances, 1)
+        modle_output = (self.model.predict(x).reshape(num_instances, 1) > 0.5).astype(int)
         return np.concatenate((modle_output ,1 - modle_output), axis=1)
