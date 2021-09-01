@@ -5,7 +5,8 @@ import numpy as np
 import tensorflow as tf
 import dice_ml
 import pandas as pd
-
+class Recorder:
+    pass 
 
 class RecordWrapper():
     '''
@@ -74,7 +75,7 @@ class NNRecordWrapper():
         cf_input = self.dice_to_input(x)
         model_output = self.model(tf.constant(
             cf_input.astype(float)), training=False).numpy()
-        model_output = (model_output > 0.5).astype(float)
+        # model_output = (model_output > 0.5).astype(float)
         return np.concatenate((1 - model_output, model_output), axis=1)
 
 
@@ -131,8 +132,8 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
         models, df_info.cat_to_ohe_cat, df_info.ohe_feature_names)
     dice_cfs = get_dice_cfs(d, wrapped_models)
 
-    # RecordWrapper.wrapped_models = wrapped_models
-    # RecordWrapper.dice_cfs = dice_cfs
+    Recorder.wrapped_models = wrapped_models
+    Recorder.dice_cfs = dice_cfs
 
     results = {}
 

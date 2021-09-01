@@ -1,12 +1,10 @@
-from typing import Counter
-from utils.cf_proto import Recorder
 import numpy as np
 import pandas as pd
 
 from time import time
 from utils.preprocessing import DfInfo
 from utils.preprocessing import inverse_dummy
-from alibi_cf import AlibiBinaryPredictWrapper
+from alibi_cf.wrappers import AlibiBinaryPredictWrapper, AlibiBinaryNNPredictWrapper
 from alibi.explainers import CounterFactual
 
 
@@ -51,15 +49,15 @@ def get_cat_vars_info(cat_feature_names, train_df):
     return cat_vars_idx_info, cat_vars_ohe
 
 
-def alibi_wrap_models(models):
+def alibi_wrap_models(models, output_int):
     '''
     Wrap the model to meet the requirements to Alibi.
     '''
 
     return {
-        'dt': AlibiBinaryPredictWrapper(models['dt']),
-        'rfc': AlibiBinaryPredictWrapper(models['rfc']),
-        'nn': AlibiBinaryPredictWrapper(models['nn']),
+        'dt': AlibiBinaryPredictWrapper(models['dt'], output_int=output_int),
+        'rfc': AlibiBinaryPredictWrapper(models['rfc'], output_int=output_int),
+        'nn': AlibiBinaryNNPredictWrapper(models['nn'], output_int=output_int),
     }
 
 
@@ -73,7 +71,7 @@ def get_watcher_cfs(wrapped_models, feature_range, X_train, max_iters):
 
     for k in wrapped_models.keys():
         watcher_cfs[k] = CounterFactual(
-            wrapped_models[k].predict,
+            wrapped_models[k].predict_proba,
             X_train[0].reshape(1, -1).shape,
             feature_range=feature_range,
             max_iter=max_iters,
@@ -82,7 +80,17 @@ def get_watcher_cfs(wrapped_models, feature_range, X_train, max_iters):
     return watcher_cfs
 
 
-def generate_watcher_result(df_info: DfInfo, train_df, models, num_instances, num_cf_per_instance, X_train, X_test, y_test, max_iters=1000, models_to_run=['dt', 'rfc', 'nn']):
+def generate_watcher_result(
+        df_info: DfInfo,
+        train_df,
+        models,
+        num_instances,
+        num_cf_per_instance,
+        X_train, X_test, y_test,
+        max_iters=1000,
+        models_to_run=['dt', 'rfc', 'nn'],
+        output_int=True
+):
     '''
     Generate counterfactuals using CounterfactualProto. 
     This counterfactul generating algorithms supports categorical features and numerical columns.
@@ -112,7 +120,7 @@ def generate_watcher_result(df_info: DfInfo, train_df, models, num_instances, nu
     # _, cat_vars_ohe = get_cat_vars_info(cat_feature_names, train_df)
 
     # Get wrapped models to meet the input and output of Alibi algorithms.
-    wrapped_models = alibi_wrap_models(models)
+    wrapped_models = alibi_wrap_models(models, output_int)
 
     Recorder.wrapped_models = wrapped_models
 
