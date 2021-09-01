@@ -104,6 +104,17 @@ def inverse_dummy(dummy_df, cat_to_ohe_cat):
         not_dummy_df.drop(cat_to_ohe_cat[k], axis=1, inplace=True)
     return not_dummy_df
 
+def inverse_scalling(scaled_df, df_info):
+    result_df = scaled_df.copy(deep=True)
+
+    result_df[df_info.numerical_cols] = df_info.scaler.inverse_transform(
+                    result_df[df_info.numerical_cols])
+
+    return result_df
+
+def inverse_scaling_and_dummy(scaled_dummy_df, df_info):
+    return inverse_scalling(inverse_dummy(scaled_dummy_df, df_info.cat_to_ohe_cat), df_info)
+
 def get_cat_ohe_info(dummy_df, categorical_cols, target_name):
     '''
     Get ohe informatoin required for counterfactual generator (DiCE, Alibi) to recognise categorical features. 
