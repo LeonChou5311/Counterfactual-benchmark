@@ -3,7 +3,7 @@ import pandas as pd
 
 from time import time
 from utils.preprocessing import DfInfo
-from utils.preprocessing import inverse_dummy, inverse_scalling
+from utils.preprocessing import inverse_dummy, inverse_scaling
 from alibi_cf.wrappers import AlibiBinaryPredictWrapper, AlibiBinaryNNPredictWrapper
 from alibi.explainers import CounterFactualProto
 
@@ -240,7 +240,7 @@ def process_result(results, df_info):
             # origin_input_df[df_info.numerical_cols] = df_info.scaler.inverse_transform(
             #     origin_input_df[df_info.numerical_cols])
 
-            origin_input_df = inverse_scalling(origin_input_df, df_info)
+            origin_input_df = inverse_scaling(origin_input_df, df_info)
 
             origin_input_df.columns = origin_columns
 
@@ -260,7 +260,7 @@ def process_result(results, df_info):
                 # origin_cf_df[df_info.numerical_cols] = df_info.scaler.inverse_transform(
                 #     origin_cf_df[df_info.numerical_cols])
 
-                origin_cf_df = inverse_scalling(origin_cf_df, df_info)
+                origin_cf_df = inverse_scaling(origin_cf_df, df_info)
 
                 origin_cf_df.columns = origin_cf_columns
 
