@@ -39,7 +39,7 @@ def train_three_models(X_train, y_train):
 
 
 
-def train_three_models_lp(X_train, y_train):
+def train_lp_three_models(X_train, y_train):
     '''
     Construct and train ['dt', 'rfc', 'nn']
 
