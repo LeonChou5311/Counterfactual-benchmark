@@ -1,4 +1,4 @@
-# Counterfactual-benchmark
+# Counterfactual-benchmark 
 
 ```
 root
@@ -20,6 +20,9 @@ face_test.ipynb
 truth_test.ipynb
 
 ```
+
+## Paper link: Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White Box to a Black Box (https://arxiv.org/abs/2203.02399)
+
 ## CUDA problem
 
 the official tutorial only show the instruction for Ubuntu 18.04. However, that one doesn't work on Ubuntu 20.04.
