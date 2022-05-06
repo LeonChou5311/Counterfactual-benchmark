@@ -1,3 +1,5 @@
+# Paper link: Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White Box to a Black Box (https://arxiv.org/abs/2203.02399)
+
 # Counterfactual-benchmark 
 
 ```
@@ -21,7 +23,6 @@ truth_test.ipynb
 
 ```
 
-## Paper link: Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White Box to a Black Box (https://arxiv.org/abs/2203.02399)
 
 ## CUDA problem
 
