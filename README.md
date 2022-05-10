@@ -7,14 +7,14 @@ In recent years, counterfactual algorithms have been proposed extensively in the
 To investigate the impact of a counterfactual generation between the different machine learning models. We select the instance centric counterfactual that we define in the paper **"[Counterfactuals and causability in explainable artificial intelligence: Theory, algorithms, and applications](https://www.sciencedirect.com/science/article/abs/pii/S1566253521002281)"** and apply the algorithms to decision tee, random forest and neural network for analysis. We also suggested a visualization (tree-based) model for deciphering how each algorithm takes a decision path in both input and a counterfactual generation.
 
 <p align="center">
-<img src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png" width="320" height="320" />
-<\p>
-
+<img src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png" width="350" height="350" />
+Caption: Experiment flow chart
 
 The key findings of this work are: (1) without guaranteeing plausibility in the counterfactual generation process, one cannot have meaningful evaluation results. This means that all explainable counterfactual algorithms that do not take into consideration plausibility in their internal mechanisms cannot be evaluated with the current state of the art evaluation metrics; (2) the counterfactuals generated are not impacted by the different types of machine learning models; (3) DiCE was the only tested algorithm that was able to generate actionable and plausible counterfactuals, because it provides mechanisms to constraint features; (4) WatcherCF and UnjustifiedCF are limited to continuous variables and can not deal with categorical data. 
 
 ![GitHub Light](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Decision%20path%20example.png)
-
+Caption: An example of a decision path in the input and its counterfactual
+  
 Note:  The experiment utilises five public datasets from the UCI repository (https://archive.ics.uci.edu/ml/index.php). 
 
 
