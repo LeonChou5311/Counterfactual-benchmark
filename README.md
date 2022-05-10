@@ -8,9 +8,9 @@ To investigate the impact of a counterfactual generation between the different m
 ![GitHub Light](https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png "width="300" height="300")
 
 
-<p align="center">
-<img width="300" height="300" src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png/300/300>
-</p>
+
+<img width="300" height="300" src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png>
+
 
 
 The key findings of this work are: (1) without guaranteeing plausibility in the counterfactual generation process, one cannot have meaningful evaluation results. This means that all explainable counterfactual algorithms that do not take into consideration plausibility in their internal mechanisms cannot be evaluated with the current state of the art evaluation metrics; (2) the counterfactuals generated are not impacted by the different types of machine learning models; (3) DiCE was the only tested algorithm that was able to generate actionable and plausible counterfactuals, because it provides mechanisms to constraint features; (4) WatcherCF and UnjustifiedCF are limited to continuous variables and can not deal with categorical data. 
