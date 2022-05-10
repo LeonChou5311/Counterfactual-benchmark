@@ -1,8 +1,8 @@
 # Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White box to a Black box
-This auxiliary repository contains details on the experiments detailed in the paper **Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White Box to a Black Box.** For more information on this study, please read the article.
+This auxiliary repository contains details on the experiments detailed in the paper **B[Benchmark Evaluation of Counterfactual Algorithms for XAI: From a White Box to a Black Box](https://arxiv.org/abs/2203.02399)
+.** For more information on this study, please read the article.
 
 
-[Benchmark](https://arxiv.org/abs/2203.02399)
 
 ## Counterfactual-benchmark 
 
