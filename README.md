@@ -9,7 +9,7 @@ To investigate the impact of a counterfactual generation between the different m
 
 
 
-<img src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png" width="250" height="250" />
+<img src="https://github.com/LeonChou5311/Counterfactual-benchmark/blob/main/Experiment%20flowchart.png" width="320" height="320" />
 
 
 
