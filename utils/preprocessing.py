@@ -12,8 +12,8 @@ def get_columns_type(df):
     '''
     Identify the column types to later classify them as categorical or numerical columns (features).
     '''
-    integer_features = list(df.select_dtypes(include=['int64']).columns)
-    float_features = list(df.select_dtypes(include=['float64']).columns)
+    integer_features = list(df.select_dtypes(include=['int64']).columns) +  list(df.select_dtypes(include=['int32']).columns)
+    float_features = list(df.select_dtypes(include=['float64']).columns) + list(df.select_dtypes(include=['float32']).columns)
     string_features = list(df.select_dtypes(include=['object']).columns)
     columns_type = {
         'integer': integer_features,

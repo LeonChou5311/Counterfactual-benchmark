@@ -113,6 +113,11 @@ def load_compas_df():
         else:
             return 'High'
 
+    transform_cat_col = ['is_recid', 'is_violent_recid', 'two_year_recid']
+
+    for col in transform_cat_col:
+        df[col] = df[col].apply(str)
+
     df['class'] = df['decile_score'].apply(get_class)
 
     del df['c_jail_in']
