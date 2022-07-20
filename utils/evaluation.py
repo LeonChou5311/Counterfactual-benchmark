@@ -122,6 +122,12 @@ def get_dummy_version(input_df: pd.DataFrame, df_info: DfInfo):
     Transform the categorical data to ohe format. (Better for calculating the distance)
     '''
 
+    def get_string_dummy_value(x):
+        if isinstance(x, float) and x==x:
+            x = int(x)
+
+        return str(x)
+
     number_of_instances = len(input_df)
 
     init_row = {}
@@ -134,7 +140,7 @@ def get_dummy_version(input_df: pd.DataFrame, df_info: DfInfo):
     for k, v in df_info.cat_to_ohe_cat.items():
         for ohe_f in v:
             init_df[ohe_f] = input_df[k].apply(
-                lambda x: 1 if ohe_f.endswith(str(x)) else 0).tolist()
+                lambda x: 1 if ohe_f.endswith(get_string_dummy_value(x)) else 0).tolist()
 
     for col in df_info.numerical_cols:
         init_df[col] = input_df[col].tolist()

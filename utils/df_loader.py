@@ -77,6 +77,10 @@ def load_german_df():
 
     df = remove_missing_values(df)
 
+    transform_cat_col = ['credits_this_bank', 'people_under_maintenance']
+    for col in transform_cat_col:
+        df[col] = df[col].apply(str)
+
     possible_outcomes = list(df[target_name].unique())
 
     numerical_cols, categorical_cols, columns_type = get_columns_type(df)
@@ -113,8 +117,8 @@ def load_compas_df():
         else:
             return 'High'
 
+    # We add some categorical columns manually.
     transform_cat_col = ['is_recid', 'is_violent_recid', 'two_year_recid']
-
     for col in transform_cat_col:
         df[col] = df[col].apply(str)
 

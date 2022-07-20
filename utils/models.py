@@ -58,8 +58,11 @@ def train_three_models_lp(X_train, y_train):
     nn.fit(X_train, y_train, batch_size=64, epochs=5, shuffle=True)
 
     models = {
-        "dt": DecisionTreeClassifier(min_sample_leaf=10,max_depths=10).fit(X_train,y_train),
-        "rfc": RandomForestClassifier(n_estimators=20, min_sample_leaf=10,max_depths=10).fit(X_train,y_train),
+        # min_sample_leaf is not exist as an argument. go to documentation to check it.
+        # it's called min_samples_leaf now.
+        # so we do the same thing for rfc.
+        "dt": DecisionTreeClassifier(min_samples_leaf=10,max_depth=10).fit(X_train,y_train), 
+        "rfc": RandomForestClassifier(n_estimators=20, min_samples_leaf=10,max_depth=10).fit(X_train,y_train),
         "nn": nn,
     }
 

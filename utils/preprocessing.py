@@ -12,6 +12,8 @@ def get_columns_type(df):
     '''
     Identify the column types to later classify them as categorical or numerical columns (features).
     '''
+
+    # And here, we include both 64 bytes and 32 bytes.
     integer_features = list(df.select_dtypes(include=['int64']).columns) +  list(df.select_dtypes(include=['int32']).columns)
     float_features = list(df.select_dtypes(include=['float64']).columns) + list(df.select_dtypes(include=['float32']).columns)
     string_features = list(df.select_dtypes(include=['object']).columns)
@@ -104,6 +106,8 @@ def inverse_dummy(dummy_df, cat_to_ohe_cat):
         not_dummy_df.drop(cat_to_ohe_cat[k], axis=1, inplace=True)
     return not_dummy_df
 
+
+
 def inverse_scaling(scaled_df, df_info):
     result_df = scaled_df.copy(deep=True)
 
@@ -142,7 +146,11 @@ def preprocess_df(df_load_fn):
     scaled_df, scaler = min_max_scale_numerical(df, numerical_cols)
 
     ## Get one-hot encoded features.
-    dummy_df = pd.get_dummies(scaled_df, columns=  [ col for col in categorical_cols if col != target_name])
+    dummy_df = pd.get_dummies(
+        scaled_df,
+         columns=  [ col for col in categorical_cols if col != target_name],
+        #   drop_first=True
+          )
 
     ## Get one-hot encoded info
     cat_to_ohe_cat, ohe_feature_names = get_cat_ohe_info(dummy_df, categorical_cols, target_name)
@@ -159,6 +167,12 @@ def preprocess_df(df_load_fn):
 
 @dataclass
 class DfInfo:
+
+    # df_info.scaler.data_min_ = [] # df_info.numerical_cols
+    # df_info.scaler.data_max_ = [] # (0,1)
+    # inverse_dummy
+    # inverse_scaling
+    # inverse_scaling_and_dummy
 
     ## Original data frame
     df: pd.DataFrame 
@@ -186,7 +200,7 @@ class DfInfo:
     ## Dataframe with the numerical columns scaled by MinMaxScaler to [0, 1]
     scaled_df: pd.DataFrame
 
-    ## MinMaxScaler to scale numerical columns.
+    ## MinMaxScaler to scale numerical columns. ()
     scaler: Any
 
     ## Dictionary {"categorical_col_name": "all of its ohe column names"}  

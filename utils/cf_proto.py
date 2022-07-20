@@ -5,10 +5,10 @@ from time import time
 from utils.preprocessing import DfInfo
 from utils.preprocessing import inverse_dummy, inverse_scaling
 from alibi_cf.wrappers import AlibiBinaryPredictWrapper, AlibiBinaryNNPredictWrapper
-from alibi.explainers import CounterFactualProto
+from alibi.explainers import CounterfactualProto
 
 
-'''
+'''s
 Acronym:
 
 dt -> Decision Tree
@@ -78,7 +78,7 @@ def get_proto_cfs(wrapped_models, feature_range, cat_vars_ohe, X_train, max_iter
         cat_arguments['ohe'] = True
 
     for k in wrapped_models.keys():
-        proto_cfs[k] = CounterFactualProto(
+        proto_cfs[k] = CounterfactualProto(
             wrapped_models[k].predict_proba,
             X_train[0].reshape(1, -1).shape,
             feature_range=feature_range,

@@ -9,129 +9,80 @@ digraph G {
     node [margin="0.03" penwidth="0.5" width=.1, height=.1];
     edge [arrowsize=.4 penwidth="0.3"]
 
-    node477 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+    node40 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node477_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node40_50294.svg"/></td>
             </tr>
             </table>>]
-	node476 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+	node39 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node476_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node39_50294.svg"/></td>
             </tr>
             </table>>]
-	node475 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+	node33 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node475_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node33_50294.svg"/></td>
             </tr>
             </table>>]
-	node381 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+	node32 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node381_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node32_50294.svg"/></td>
             </tr>
             </table>>]
-	node380 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+	node20 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node380_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node20_50294.svg"/></td>
             </tr>
             </table>>]
-	node379 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+	node4 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node379_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node378 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node378_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node377 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node377_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node376 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node376_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node344 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node344_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node343 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node343_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node342 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node342_15849.svg"/></td>
-            </tr>
-            </table>>]
-	node341 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node341_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node4_50294.svg"/></td>
             </tr>
             </table>>]
 	node3 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node3_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node3_50294.svg"/></td>
             </tr>
             </table>>]
 	node2 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node2_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node2_50294.svg"/></td>
             </tr>
             </table>>]
 	node1 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node1_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node1_50294.svg"/></td>
             </tr>
             </table>>]
 	node0 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
             
             <tr>
-                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node0_15849.svg"/></td>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node0_50294.svg"/></td>
             </tr>
             </table>>]
-    node477 -> leaf481 [penwidth=1.2 color="#D67C03" label=<>]
-	node476 -> node477 [penwidth=1.2 color="#D67C03" label=<>]
-	node475 -> node476 [penwidth=1.2 color="#D67C03" label=<>]
-	node381 -> node475 [penwidth=1.2 color="#D67C03" label=<>]
-	node380 -> node381 [penwidth=1.2 color="#D67C03" label=<>]
-	node379 -> node380 [penwidth=1.2 color="#D67C03" label=<>]
-	node378 -> node379 [penwidth=1.2 color="#D67C03" label=<>]
-	node377 -> node378 [penwidth=1.2 color="#D67C03" label=<>]
-	node376 -> node377 [penwidth=1.2 color="#D67C03" label=<>]
-	node344 -> node376 [penwidth=1.2 color="#D67C03" label=<>]
-	node343 -> node344 [penwidth=1.2 color="#D67C03" label=<>]
-	node342 -> node343 [penwidth=1.2 color="#D67C03" label=<>]
-	node341 -> node342 [penwidth=1.2 color="#D67C03" label=<>]
-	node3 -> node341 [penwidth=1.2 color="#D67C03" label=<>]
+    node40 -> leaf41 [penwidth=1.2 color="#D67C03" label=<>]
+	node39 -> node40 [penwidth=1.2 color="#D67C03" label=<>]
+	node33 -> node39 [penwidth=1.2 color="#D67C03" label=<>]
+	node32 -> node33 [penwidth=1.2 color="#D67C03" label=<>]
+	node20 -> node32 [penwidth=1.2 color="#D67C03" label=<>]
+	node4 -> node20 [penwidth=1.2 color="#D67C03" label=<>]
+	node3 -> node4 [penwidth=1.2 color="#D67C03" label=<>]
 	node2 -> node3 [penwidth=1.2 color="#D67C03" label=<>]
 	node1 -> node2 [penwidth=1.2 color="#D67C03" label=<>]
 	node0 -> node1 [penwidth=1.2 color="#D67C03" label=<>]
-    leaf481 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0" CELLBORDER="0">
+    leaf41 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0" CELLBORDER="0">
         
         <tr>
-                <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/leaf481_15849.svg"/></td>
+                <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/leaf41_50294.svg"/></td>
         </tr>
         </table>>]
 
@@ -142,7 +93,7 @@ digraph G {
                 
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td border="0" cellspacing="0" cellpadding="0"><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/legend_15849.svg"/></td>
+                <td border="0" cellspacing="0" cellpadding="0"><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/legend_50294.svg"/></td>
             </tr>
         </table>
         
@@ -156,16 +107,16 @@ digraph G {
                 
                 <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">priors_count</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">days_b_screening_arrest</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">is_recid</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">is_violent_recid</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">two_year_recid</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">length_of_stay</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">age_cat_25 - 45</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">age_cat_Greater than 45</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">age_cat_Less than 25</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">sex_Female</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">sex_Male</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">race_African-American</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">race_Asian</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">race_Caucasian</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">race_Hispanic</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">race_Native American</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">race_Other</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">c_charge_degree_F</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">c_charge_degree_M</font></td>
+                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">priors_count</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">priors_count</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">length_of_stay</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">race_African-American</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">two_year_recid_1</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">c_charge_degree_F</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">days_b_screening_arrest</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">...</font></td>
                 </tr>
                 <tr>
-                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">4.44</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">2.32</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">0.00</font></td>
+                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">...</font></td>
                 </tr>
                 </table>
                 
                 >]
             }
-            leaf481 -> X_y [dir=back; penwidth="1.2" color="#D67C03" label=<<font face="Helvetica" color="#444443" point-size="11"> &#160;Prediction<br/> Yes</font>>]
+            leaf41 -> X_y [dir=back; penwidth="1.2" color="#D67C03" label=<<font face="Helvetica" color="#444443" point-size="11"> &#160;Prediction<br/> No</font>>]
             
 }
     
