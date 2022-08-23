@@ -4,6 +4,22 @@ from utils.preprocessing import get_columns_type, transform_to_dummy, label_enco
 
 import numpy as np
 
+
+def get_loading_fn(dataset_name):
+    if dataset_name == 'adult':
+        dataset_loading_fn = load_adult_df
+    elif dataset_name == 'german':
+        dataset_loading_fn = load_german_df
+    elif dataset_name == 'compas':
+        dataset_loading_fn = load_compas_df
+    elif dataset_name == 'diabetes':
+        dataset_loading_fn = load_diabetes_df
+    elif dataset_name == 'breast_cancer':
+        dataset_loading_fn = load_breast_cancer_df
+    else:
+        raise Exception("Unsupported dataset")
+    return dataset_loading_fn
+
 def load_adult_df():
     ##### Pre-defined #####
     target_name = 'class'

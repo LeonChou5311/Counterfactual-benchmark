@@ -31,8 +31,14 @@ def get_L1(**kwargs):
 
 
 def get_sparsity(**kwargs):
-    input_array = np.array(kwargs['input'])
-    cf_array = np.array(kwargs['cf'])
+
+    # should remove the target column first.
+    
+    input_df = kwargs['not_dummy_input']
+    cf_df = kwargs['not_dummy_cf']
+
+    input_array = np.array(input_df)
+    cf_array = np.array(cf_df)
 
     return (input_array != cf_array).astype(int).sum(axis=1)
 
@@ -67,6 +73,9 @@ def get_mad(**kwargs,):
 
     if len(ohe_cat_cols) > 0 and len(ohe_num_cols) > 0:
         return (mad_df[ohe_num_cols].mean(axis=1) + mad_df[ohe_cat_cols].mean(axis=1)).tolist()
+        # return mad_df.mean(axis=1).tolist()
+        # return mad_df.sum(axis=1).tolist() # <=(weird, may be wrong) actually from (https://github.com/ADMAntwerp/CounterfactualBenchmark/blob/9dbf6a9e604ce1a2a0ddfb15025718f2e0effb0a/frameworks/LORE/distance_functions.py) 
+
     elif len(ohe_num_cols) > 0:
         return mad_df[ohe_num_cols].mean(axis=1).tolist()
     elif len(ohe_cat_cols) > 0:
@@ -172,6 +181,8 @@ def prepare_evaluation_dict(result_df: pd.DataFrame, df_info: DfInfo):
     return {
         "input": get_dummy_version(get_type_instance(result_df, InstanceType.ScaledInput), df_info),
         "cf": get_dummy_version(get_type_instance(result_df, InstanceType.ScaledCf), df_info),
+        "not_dummy_input": get_type_instance(result_df, InstanceType.ScaledInput).drop(df_info.target_name, axis=1),
+        "not_dummy_cf": get_type_instance(result_df, InstanceType.ScaledCf).drop(df_info.target_name, axis=1),
         "df_info": df_info,
     }
 
