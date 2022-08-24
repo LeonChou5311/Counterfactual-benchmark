@@ -37,6 +37,7 @@ tf.keras.models.Sequential(
         )
 ```
 **Optimiser**: Adam
+
 **Loss**: Cross Entropy
 
 # Counterfactual Algorithm Parameterss
