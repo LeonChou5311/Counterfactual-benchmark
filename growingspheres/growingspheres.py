@@ -30,6 +30,7 @@ class GrowingSpheres:
                 verbose=False):
         """
         """
+        print("In the setup")
         self.obs_to_interprete = obs_to_interprete
         self.prediction_fn = prediction_fn
         self.y_obs = prediction_fn(obs_to_interprete.reshape(1, -1))
@@ -121,11 +122,20 @@ class GrowingSpheres:
         """
         if self.verbose == True:
             print("Feature selection...")
+
+
         move_sorted = sorted(enumerate(abs(counterfactual - self.obs_to_interprete)), key=lambda x: x[1])
         move_sorted = [x[0] for x in move_sorted if x[1] > 0.0]
         out = counterfactual.copy()
-        reduced = 0
+
+        print("Type out is")
+        print(out.dtype)
         
+        print("Type self.obs_to_interprete is")
+        print(self.obs_to_interprete.dtype)
+
+        reduced = 0
+
         for k in move_sorted:
             new_enn = out.copy()
             new_enn[k] = self.obs_to_interprete[k]

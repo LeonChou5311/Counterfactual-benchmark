@@ -168,7 +168,6 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
                 exp = dice_cfs[k].generate_counterfactuals(
                     input_query[df_info.feature_names], total_CFs=2, sample_size=sample_size, desired_class="opposite", verbose=True, posthoc_sparsity_param=None)
                 # #features_to_vary=["education", "occupation"]
-
                 
                 # print("After generating cf")
                 # dice_exp = dice_cfs['nn'].generate_counxwterfactuals(scaled_df.iloc[1:2], total_CFs=1, desired_class="opposite")
