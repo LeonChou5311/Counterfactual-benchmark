@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from utils.preprocessing import DfInfo
 from time import time
 
@@ -83,7 +84,7 @@ def dice_wrap_models(models, cat_to_ohe_cat, ohe_feature_names):
     '''
     Wrap the models to precess the input and output as the rquired of dice.
     '''
-
+    # https://interpret.ml/DiCE/
     return {
         'dt': RecordWrapper(models['dt'], cat_to_ohe_cat, ohe_feature_names),
         'rfc': RecordWrapper(models['rfc'], cat_to_ohe_cat, ohe_feature_names),
@@ -145,13 +146,31 @@ def generate_dice_result(df_info: DfInfo, test_df, models, num_instances, num_cf
             for num_cf in range(num_cf_per_instance):
                 print(f"CF {num_cf}")
                 start_t = time()
-
                 input_query = pd.DataFrame([instance.to_dict()])
                 ground_truth = input_query[df_info.target_name][0]
-                exp = dice_cfs[k].generate_counterfactuals(
-                    input_query[df_info.feature_names], total_CFs=1, sample_size=sample_size, desired_class="opposite")
+                # print("Before generating cf")
+                # Algorithm freeze here.
+                # 1. perform this function outside of this script
+                # 2. [prepare]: dice_cfs[k] (k is the running model) (x)
+                # 3. [prepare]: input_query (x)
+                # 4. sample_size = 50 (x)
+                # 5. first try: get the successful case.
+                # 6. get the error case.
 
-                # dice_exp = dice_cfs['nn'].generate_counterfactuals(scaled_df.iloc[1:2], total_CFs=1, desired_class="opposite")
+                # Recorder.k = k
+                # Recorder.input_query = input_query
+                # Recorder.idx = idx
+                # Recorder.ground_truth = ground_truth
+                # print(f"Ground Truth is {input_query[df_info.target_name][0]}")
+                # if idx == 3:
+                #     raise StopIteration
+
+                exp = dice_cfs[k].generate_counterfactuals(
+                    input_query[df_info.feature_names], total_CFs=2, sample_size=sample_size, desired_class="opposite", verbose=True, posthoc_sparsity_param=None)
+                # #features_to_vary=["education", "occupation"]
+                
+                # print("After generating cf")
+                # dice_exp = dice_cfs['nn'].generate_counxwterfactuals(scaled_df.iloc[1:2], total_CFs=1, desired_class="opposite")
                 # dice_exp.cf_examples_list[0].final_cfs_df.iloc[0][:-1]
 
                 # if k=='nn':

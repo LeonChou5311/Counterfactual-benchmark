@@ -4,6 +4,22 @@ from utils.preprocessing import get_columns_type, transform_to_dummy, label_enco
 
 import numpy as np
 
+
+def get_loading_fn(dataset_name):
+    if dataset_name == 'adult':
+        dataset_loading_fn = load_adult_df
+    elif dataset_name == 'german':
+        dataset_loading_fn = load_german_df
+    elif dataset_name == 'compas':
+        dataset_loading_fn = load_compas_df
+    elif dataset_name == 'diabetes':
+        dataset_loading_fn = load_diabetes_df
+    elif dataset_name == 'breast_cancer':
+        dataset_loading_fn = load_breast_cancer_df
+    else:
+        raise Exception("Unsupported dataset")
+    return dataset_loading_fn
+
 def load_adult_df():
     ##### Pre-defined #####
     target_name = 'class'
@@ -77,6 +93,10 @@ def load_german_df():
 
     df = remove_missing_values(df)
 
+    transform_cat_col = ['credits_this_bank', 'people_under_maintenance']
+    for col in transform_cat_col:
+        df[col] = df[col].apply(str)
+
     possible_outcomes = list(df[target_name].unique())
 
     numerical_cols, categorical_cols, columns_type = get_columns_type(df)
@@ -112,6 +132,11 @@ def load_compas_df():
             return 'Medium-Low'
         else:
             return 'High'
+
+    # We add some categorical columns manually.
+    transform_cat_col = ['is_recid', 'is_violent_recid', 'two_year_recid']
+    for col in transform_cat_col:
+        df[col] = df[col].apply(str)
 
     df['class'] = df['decile_score'].apply(get_class)
 

@@ -5,6 +5,10 @@ import numpy as np
 
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import recall_score, precision_score, accuracy_score, f1_score, confusion_matrix
+import matplotlib.pyplot as plt
+
+
 import os
 
 def train_three_models(X_train, y_train):
@@ -34,12 +38,9 @@ def train_three_models(X_train, y_train):
         "nn": nn,
     }
 
-
     return models
 
-
-
-def train_lp_three_models(X_train, y_train):
+def train_three_models_lp(X_train, y_train):
     '''
     Construct and train ['dt', 'rfc', 'nn']
 
@@ -58,26 +59,57 @@ def train_lp_three_models(X_train, y_train):
     nn.fit(X_train, y_train, batch_size=64, epochs=5, shuffle=True)
 
     models = {
-        "dt": DecisionTreeClassifier(min_sample_leaf=10,max_depths=10).fit(X_train,y_train),
-        "rfc": RandomForestClassifier(n_estimators=20, min_sample_leaf=10,max_depths=10).fit(X_train,y_train),
+        # min_sample_leaf is not exist as an argument. go to documentation to check it.
+        # it's called min_samples_leaf now.
+        # so we do the same thing for rfc.
+        "dt": DecisionTreeClassifier(min_samples_leaf=10,max_depth=10).fit(X_train,y_train), 
+        "rfc": RandomForestClassifier(n_estimators=20, min_samples_leaf=10,max_depth=10).fit(X_train,y_train),
         "nn": nn,
     }
 
-
     return models
-
 
 
 def evaluation_test(models, X_test, y_test):
     '''
     Evaluation the trained models.
     '''
-    dt_acc = (models['dt'].predict(X_test) == y_test).astype(int).sum() / X_test.shape[0]
-    rfc_acc = (models['rfc'].predict(X_test) == y_test).astype(int).sum() / X_test.shape[0]
-    nn_acc = ((models['nn'].predict(X_test) > 0.5).flatten().astype(int) == y_test).astype(int).sum() / X_test.shape[0]
 
-    print(f"DT: [{dt_acc:.4f}] | RF [{rfc_acc:.4f}] | NN [{nn_acc:.4f}]")
+    dt_pred = models['dt'].predict(X_test)
+    rfc_pred = models['rfc'].predict(X_test)
+    nn_pred = (models['nn'].predict(X_test) > 0.5).flatten().astype(int)
 
+    # dt_acc = (models['dt'].predict(X_test) == y_test).astype(int).sum() / X_test.shape[0]
+    # rfc_acc = (models['rfc'].predict(X_test) == y_test).astype(int).sum() / X_test.shape[0]
+    # nn_acc = ((models['nn'].predict(X_test) > 0.5).flatten().astype(int) == y_test).astype(int).sum() / X_test.shape[0]
+
+
+    #### DT model 
+    print_eval_states(y_test, dt_pred, name="Decision Tree")
+    print_eval_states(y_test, rfc_pred, name="Random Forest")
+    print_eval_states(y_test, nn_pred, name="Neural Network")
+
+
+def print_eval_states(y_test, y_pred, name=None):
+
+    conf_matrix = confusion_matrix(y_true=y_test, y_pred=y_pred)
+    recall_score, precision_score, accuracy_score, f1_score
+    recall = recall_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    accuracy = accuracy_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+
+    print(f"Model: [{name}] | Accuracy: [{accuracy:.4f}] | Precision: [{precision:.4f} | Recall: [{recall:.4f}] | F1: [{f1:.4f}]")
+
+    fig, ax = plt.subplots(figsize=(5, 5))
+    ax.matshow(conf_matrix, cmap=plt.cm.Oranges, alpha=0.3)
+    for i in range(conf_matrix.shape[0]):
+        for j in range(conf_matrix.shape[1]):
+            ax.text(x=j, y=i,s=conf_matrix[i, j], va='center', ha='center', size='xx-large')
+            plt.xlabel('Predictions', fontsize=18)
+    plt.ylabel('Actuals', fontsize=18)
+    plt.title(f'Confusion Matrix ({name})', fontsize=18)
+    plt.show()
 
 def save_three_models(models, dataset_name, path='./saved_models'):
     '''

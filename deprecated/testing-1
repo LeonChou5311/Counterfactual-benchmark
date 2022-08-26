@@ -1,0 +1,122 @@
+
+digraph G {
+    splines=line;
+    nodesep=0.1;
+    ranksep=.2;
+    rankdir=TD;
+    margin=0.0;
+    graph [label="Decison Tree - COMPAS with decision path", labelloc=t, fontname="Arial" fontsize=14 fontcolor="#444443"];
+    node [margin="0.03" penwidth="0.5" width=.1, height=.1];
+    edge [arrowsize=.4 penwidth="0.3"]
+
+    node40 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node40_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node39 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node39_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node33 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node33_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node32 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node32_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node20 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node20_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node4 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node4_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node3 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node3_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node2 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node2_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node1 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node1_50294.svg"/></td>
+            </tr>
+            </table>>]
+	node0 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0">
+            
+            <tr>
+                    <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/node0_50294.svg"/></td>
+            </tr>
+            </table>>]
+    node40 -> leaf41 [penwidth=1.2 color="#D67C03" label=<>]
+	node39 -> node40 [penwidth=1.2 color="#D67C03" label=<>]
+	node33 -> node39 [penwidth=1.2 color="#D67C03" label=<>]
+	node32 -> node33 [penwidth=1.2 color="#D67C03" label=<>]
+	node20 -> node32 [penwidth=1.2 color="#D67C03" label=<>]
+	node4 -> node20 [penwidth=1.2 color="#D67C03" label=<>]
+	node3 -> node4 [penwidth=1.2 color="#D67C03" label=<>]
+	node2 -> node3 [penwidth=1.2 color="#D67C03" label=<>]
+	node1 -> node2 [penwidth=1.2 color="#D67C03" label=<>]
+	node0 -> node1 [penwidth=1.2 color="#D67C03" label=<>]
+    leaf41 [margin="0" shape=box penwidth=".5" color="#D67C03" style="dashed" label=<<table border="0" CELLBORDER="0">
+        
+        <tr>
+                <td><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/leaf41_50294.svg"/></td>
+        </tr>
+        </table>>]
+
+    
+            subgraph cluster_legend {
+                style=invis;
+                legend [penwidth="0" margin="0" shape=box margin="0.03" width=.1, height=.1 label=<
+                
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td border="0" cellspacing="0" cellpadding="0"><img src="/var/folders/cj/76jxqn71757384mssvb297jw0000gn/T/legend_50294.svg"/></td>
+            </tr>
+        </table>
+        
+                >]
+            }
+            
+    
+            subgraph cluster_instance {
+                style=invis;
+                X_y [penwidth="0.3" margin="0" shape=box margin="0.03" width=.1, height=.1 label=<
+                
+                <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">priors_count</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">priors_count</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">length_of_stay</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">race_African-American</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">two_year_recid_1</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">c_charge_degree_F</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">age</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">days_b_screening_arrest</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">...</font></td>
+                </tr>
+                <tr>
+                    <td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">1.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#D67C03" point-size="11">0.00</font></td><td cellpadding="1" align="right" bgcolor="white"><font face="Helvetica" color="#444443" point-size="11">...</font></td>
+                </tr>
+                </table>
+                
+                >]
+            }
+            leaf41 -> X_y [dir=back; penwidth="1.2" color="#D67C03" label=<<font face="Helvetica" color="#444443" point-size="11"> &#160;Prediction<br/> No</font>>]
+            
+}
+    
